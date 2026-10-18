@@ -1,5 +1,7 @@
 import type { Metadata } from "next";
+import Image from "next/image";
 import Link from "next/link";
+import logo from "../../public/logo.jpeg";
 
 export const metadata: Metadata = {
   title: "Em Desenvolvimento",
@@ -9,7 +11,9 @@ export default function MaintenancePage() {
   return (
     <main className="maintenance-shell">
       <section className="maintenance-content">
-        <p className="maintenance-brand">JHONNY SILVA</p>
+        <p className="maintenance-brand">
+          Jhonny Silva
+        </p>
         <span className="maintenance-status">Em desenvolvimento</span>
         <h1>Portfolio em desenvolvimento.</h1>
         <p>
@@ -21,7 +25,7 @@ export default function MaintenancePage() {
         </a>
         <footer className="w-full max-w-xl flex justify-center gap-6 py-4 text-sm text-zinc-500">
           <a
-            href="https://github.com/Joao-P-Silva"
+            href="https://github.com/jhonnysilvadev"
             target="_blank"
             rel="noopener noreferrer"
             className="hover:text-zinc-300 transition-colors"

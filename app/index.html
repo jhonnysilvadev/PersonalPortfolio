@@ -1,0 +1,451 @@
+<!DOCTYPE html>
+<html lang="pt">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Navbar Preview com Scroll</title>
+  
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;500;600;700&display=swap" rel="stylesheet">
+
+  <style>
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
+    html {
+      scroll-behavior: smooth;
+    }
+
+    body {
+      background: radial-gradient(circle at 50% 0%, #27272a 0%, #09090b 48%, #000 100%);
+      background-attachment: fixed;
+      min-height: 100vh;
+      font-family: 'Space Grotesk', sans-serif;
+      color: #ffffff;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      padding: 0 1.25rem 5rem;
+    }
+
+    /* Contentor fixo/sticky para testar o scroll */
+    .nav-wrapper {
+      position: sticky;
+      top: 1.25rem;
+      width: 100%;
+      max-width: 1100px;
+      z-index: 1000;
+      padding-top: 1.25rem;
+    }
+
+    .navbar {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      width: 100%;
+      gap: 1rem;
+    }
+
+    /* Estilo partilhado de vidro fosco */
+    .glass-pill {
+      background: rgba(255, 255, 255, 0.04);
+      backdrop-filter: blur(16px);
+      -webkit-backdrop-filter: blur(16px);
+      border: 1px solid rgba(255, 255, 255, 0.08);
+      box-shadow: 0 10px 30px -10px rgba(0, 0, 0, 0.6);
+      border-radius: 9999px;
+    }
+
+    /* 1. Nome */
+    .brand-pill {
+      color: #ffffff;
+      text-decoration: none;
+      font-weight: 700;
+      font-size: 0.95rem;
+      letter-spacing: -0.01em;
+      padding: 0.65rem 1.4rem;
+      white-space: nowrap;
+      display: inline-flex;
+      align-items: center;
+      transition: all 0.25s ease;
+      width: fit-content;
+    }
+
+    .brand-pill:hover {
+      background: rgba(255, 255, 255, 0.08);
+      border-color: rgba(255, 255, 255, 0.2);
+    }
+
+    /* 2. Menu Central */
+    .nav-pill-group {
+      padding: 0.35rem 0.45rem;
+      display: inline-flex;
+      align-items: center;
+      gap: 0.25rem;
+      width: fit-content;
+    }
+
+    .nav-link {
+      color: rgba(255, 255, 255, 0.65);
+      text-decoration: none;
+      font-size: 0.9rem;
+      font-weight: 500;
+      padding: 0.45rem 1.15rem;
+      border-radius: 9999px;
+      transition: all 0.2s ease;
+      white-space: nowrap;
+    }
+
+    .nav-link:hover {
+      color: #ffffff;
+    }
+
+    .nav-link.active {
+      background-color: #ffffff;
+      color: #09090b;
+      font-weight: 600;
+      box-shadow: 0 2px 10px rgba(255, 255, 255, 0.12);
+    }
+
+    /* 3. Redes Sociais */
+    .social-pill {
+      padding: 0.65rem 1.1rem;
+      display: inline-flex;
+      align-items: center;
+      gap: 0.85rem;
+      width: fit-content;
+    }
+
+    .social-pill a {
+      color: rgba(255, 255, 255, 0.7);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      transition: all 0.2s ease;
+    }
+
+    .social-pill a:hover {
+      color: #ffffff;
+      transform: scale(1.12);
+    }
+
+    .social-pill svg {
+      width: 1.1rem;
+      height: 1.1rem;
+      fill: currentColor;
+    }
+
+    /* Botão Hambúrguer Mobile */
+    .menu-toggle {
+      display: none;
+      background: rgba(255, 255, 255, 0.04);
+      border: 1px solid rgba(255, 255, 255, 0.08);
+      width: 42px;
+      height: 42px;
+      border-radius: 50%;
+      cursor: pointer;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      gap: 5px;
+      backdrop-filter: blur(14px);
+      -webkit-backdrop-filter: blur(14px);
+    }
+
+    .menu-toggle span {
+      display: block;
+      width: 18px;
+      height: 2px;
+      background-color: #ffffff;
+      border-radius: 2px;
+      transition: all 0.25s ease;
+    }
+
+    .menu-toggle.open span:nth-child(1) { transform: translateY(7px) rotate(45deg); }
+    .menu-toggle.open span:nth-child(2) { opacity: 0; }
+    .menu-toggle.open span:nth-child(3) { transform: translateY(-7px) rotate(-45deg); }
+
+    .desktop-nav {
+      display: contents;
+    }
+
+    /* CONTEÚDO PARA SCROLL */
+    main {
+      width: 100%;
+      max-width: 1100px;
+      margin-top: 4rem;
+      display: flex;
+      flex-direction: column;
+      gap: 6rem;
+    }
+
+    .hero-section {
+      text-align: center;
+      padding: 5rem 1rem;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 1.5rem;
+    }
+
+    .hero-badge {
+      display: inline-block;
+      font-size: 0.8rem;
+      letter-spacing: 0.05em;
+      text-transform: uppercase;
+      padding: 0.35rem 0.85rem;
+      border-radius: 9999px;
+      background: rgba(255, 255, 255, 0.05);
+      border: 1px solid rgba(255, 255, 255, 0.1);
+      color: rgba(255, 255, 255, 0.7);
+    }
+
+    .hero-section h1 {
+      font-size: clamp(2.5rem, 6vw, 4.5rem);
+      line-height: 1.1;
+      letter-spacing: -0.03em;
+      max-width: 800px;
+    }
+
+    .hero-section p {
+      font-size: 1.15rem;
+      color: rgba(255, 255, 255, 0.6);
+      max-width: 550px;
+      line-height: 1.6;
+    }
+
+    .section-title {
+      font-size: 2rem;
+      margin-bottom: 2rem;
+      letter-spacing: -0.02em;
+    }
+
+    /* Grelha de Projetos */
+    .cards-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+      gap: 1.5rem;
+    }
+
+    .card {
+      background: rgba(255, 255, 255, 0.02);
+      border: 1px solid rgba(255, 255, 255, 0.07);
+      border-radius: 20px;
+      padding: 2rem;
+      display: flex;
+      flex-direction: column;
+      gap: 1rem;
+      transition: transform 0.2s ease, border-color 0.2s ease;
+    }
+
+    .card:hover {
+      transform: translateY(-4px);
+      border-color: rgba(255, 255, 255, 0.2);
+    }
+
+    .card-preview {
+      height: 180px;
+      background: linear-gradient(135deg, rgba(255,255,255,0.05), rgba(255,255,255,0.01));
+      border-radius: 12px;
+      border: 1px solid rgba(255, 255, 255, 0.05);
+    }
+
+    .card h3 {
+      font-size: 1.25rem;
+    }
+
+    .card p {
+      color: rgba(255, 255, 255, 0.55);
+      line-height: 1.5;
+      font-size: 0.95rem;
+    }
+
+    .text-block {
+      background: rgba(255, 255, 255, 0.02);
+      border: 1px solid rgba(255, 255, 255, 0.06);
+      border-radius: 24px;
+      padding: 3rem;
+      line-height: 1.8;
+      color: rgba(255, 255, 255, 0.65);
+      display: flex;
+      flex-direction: column;
+      gap: 1.5rem;
+    }
+
+    footer {
+      text-align: center;
+      padding-top: 5rem;
+      color: rgba(255, 255, 255, 0.3);
+      font-size: 0.85rem;
+    }
+
+    /* REGRAS MOBILE */
+    @media (max-width: 860px) {
+      .menu-toggle {
+        display: flex;
+      }
+
+      .desktop-nav {
+        display: none;
+        position: absolute;
+        top: calc(100% + 0.85rem);
+        left: 0;
+        right: 0;
+        flex-direction: column;
+        gap: 1rem;
+        background: rgba(18, 18, 20, 0.94);
+        backdrop-filter: blur(20px);
+        -webkit-backdrop-filter: blur(20px);
+        border: 1px solid rgba(255, 255, 255, 0.1);
+        border-radius: 24px;
+        padding: 1.25rem;
+        box-shadow: 0 15px 35px rgba(0, 0, 0, 0.7);
+        z-index: 50;
+      }
+
+      .desktop-nav.active {
+        display: flex;
+      }
+
+      .nav-pill-group {
+        flex-direction: column;
+        background: transparent;
+        border: none;
+        box-shadow: none;
+        padding: 0;
+        gap: 0.35rem;
+        width: 100%;
+      }
+
+      .nav-link {
+        width: 100%;
+        text-align: center;
+        padding: 0.75rem 1rem;
+        font-size: 1rem;
+      }
+
+      .social-pill {
+        justify-content: center;
+        width: 100%;
+        background: transparent;
+        border: none;
+        box-shadow: none;
+        border-top: 1px solid rgba(255, 255, 255, 0.08);
+        border-radius: 0;
+        padding-top: 1rem;
+        gap: 1.5rem;
+      }
+    }
+  </style>
+</head>
+<body>
+
+  <!-- NAVBAR STICKY -->
+  <div class="nav-wrapper">
+    <nav class="navbar">
+      <a href="#" class="brand-pill glass-pill">Jhonny Silva</a>
+
+      <button class="menu-toggle" id="menuToggle" aria-label="Abrir Menu">
+        <span></span>
+        <span></span>
+        <span></span>
+      </button>
+
+      <div class="desktop-nav" id="navGroup">
+        <div class="nav-pill-group glass-pill">
+          <a href="#home" class="nav-link active">Home</a>
+          <a href="#projects" class="nav-link">Projects</a>
+          <a href="#about" class="nav-link">About</a>
+          <a href="#contact" class="nav-link">Contact</a>
+        </div>
+
+        <div class="social-pill glass-pill">
+          <a href="https://linkedin.com" target="_blank" rel="noopener noreferrer" aria-label="LinkedIn">
+            <svg viewBox="0 0 24 24"><path d="M19 3a2 2 0 0 1 2 2v14a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h14m-.5 15.5v-5.3a3.26 3.26 0 0 0-3.26-3.26c-.85 0-1.84.52-2.28 1.3v-1.11h-2.79v8.37h2.79v-4.93c0-.77.62-1.4 1.39-1.4a1.4 1.4 0 0 1 1.4 1.4v4.93h2.75M6.46 10.9v8.37H9.2V10.9H6.46M7.83 6.45a1.67 1.67 0 1 0 0 3.34 1.67 1.67 0 0 0 0-3.34Z"/></svg>
+          </a>
+          <a href="https://github.com" target="_blank" rel="noopener noreferrer" aria-label="GitHub">
+            <svg viewBox="0 0 24 24"><path d="M12 2A10 10 0 0 0 2 12c0 4.42 2.87 8.17 6.84 9.5.5.08.66-.23.66-.5v-1.69c-2.77.6-3.36-1.34-3.36-1.34-.46-1.16-1.11-1.47-1.11-1.47-.91-.62.07-.6.07-.6 1 .07 1.53 1.03 1.53 1.03.87 1.52 2.34 1.07 2.91.83.1-.65.35-1.09.63-1.34-2.22-.25-4.55-1.11-4.55-4.92 0-1.11.38-2 1.03-2.71-.1-.25-.45-1.29.1-2.64 0 0 .84-.27 2.75 1.02.79-.22 1.65-.33 2.5-.33.85 0 1.71.11 2.5.33 1.91-1.29 2.75-1.02 2.75-1.02.55 1.35.2 2.39.1 2.64.65.71 1.03 1.6 1.03 2.71 0 3.82-2.34 4.66-4.57 4.91.36.31.69.92.69 1.85V21c0 .27.16.59.67.5C19.14 20.16 22 16.42 22 12A10 10 0 0 0 12 2Z"/></svg>
+          </a>
+        </div>
+      </div>
+    </nav>
+  </div>
+
+  <!-- CONTEÚDO PARA CRIAR SCROLL LONGO -->
+  <main>
+    <section id="home" class="hero-section">
+      <span class="hero-badge">Disponível para projetos</span>
+      <h1>Criando experiências digitais com precisão e fluidez.</h1>
+      <p>Desenvolvedor focado em interfaces modernas, arquitetura escalável e design funcional.</p>
+    </section>
+
+    <section id="projects">
+      <h2 class="section-title">Trabalhos em Destaque</h2>
+      <div class="cards-grid">
+        <div class="card">
+          <div class="card-preview"></div>
+          <h3>Dashboard Analítico</h3>
+          <p>Plataforma web de análise de dados em tempo real com renderização fluida e tema escuro nativo.</p>
+        </div>
+        <div class="card">
+          <div class="card-preview"></div>
+          <h3>Design System Minimal</h3>
+          <p>Biblioteca de componentes construída com foco em acessibilidade e consistência visual rigorosa.</p>
+        </div>
+        <div class="card">
+          <div class="card-preview"></div>
+          <h3>App Mobile Financeira</h3>
+          <p>Aplicação centrada no utilizador para gestão orçamental e investimentos simplificados.</p>
+        </div>
+        <div class="card">
+          <div class="card-preview"></div>
+          <h3>API Gateway Core</h3>
+          <p>Microsserviço de baixa latência construído para autenticação rápida e roteamento dinâmico.</p>
+        </div>
+      </div>
+    </section>
+
+    <section id="about">
+      <h2 class="section-title">Sobre Mim</h2>
+      <div class="text-block">
+        <p>A obsessão por pormenores faz toda a diferença no produto final. Cada pixel, transição e espaçamento deve ter um propósito bem definido.</p>
+        <p>Ao navegar pela página com o menu fixo (*sticky*), podes reparar em como o fundo desfocado das cápsulas reage a passar por cima dos títulos brancos e dos blocos de texto, mantendo a leitura sem tapar o ecrã bruscamente.</p>
+      </div>
+    </section>
+
+    <section id="contact">
+      <h2 class="section-title">Contacto</h2>
+      <div class="text-block" style="text-align: center; align-items: center;">
+        <h3>Tens um projeto em mente?</h3>
+        <p>Envia uma mensagem para começarmos a delinear a tua ideia.</p>
+      </div>
+    </section>
+
+    <footer>
+      <p>© 2026 Jhonny Silva. Todos os direitos reservados.</p>
+    </footer>
+  </main>
+
+  <script>
+    const menuToggle = document.getElementById('menuToggle');
+    const navGroup = document.getElementById('navGroup');
+
+    menuToggle.addEventListener('click', () => {
+      menuToggle.classList.toggle('open');
+      navGroup.classList.toggle('active');
+    });
+
+    document.querySelectorAll('.nav-link').forEach(link => {
+      link.addEventListener('click', () => {
+        menuToggle.classList.remove('open');
+        navGroup.classList.remove('active');
+      });
+    });
+  </script>
+
+</body>
+</html>

@@ -3,6 +3,7 @@ import { JetBrains_Mono, Space_Grotesk } from "next/font/google";
 import type { ReactNode } from "react";
 import "./globals.css";
 
+
 const geistSans = Space_Grotesk({
   variable: "--font-geist-sans",
   subsets: ["latin"],
