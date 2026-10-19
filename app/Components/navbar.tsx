@@ -29,7 +29,7 @@ export default function Navbar() {
         </button>
 
         <div className={`desktop-nav${isMenuOpen ? " active" : ""}`} id="navGroup">
-          <div className="nav-pill-group glass-pill">
+          <div className="nav-pill-group glass-pill" id="glassPill">
             <a href="#home" className="nav-link active" onClick={closeMenu}>
               Home
             </a>

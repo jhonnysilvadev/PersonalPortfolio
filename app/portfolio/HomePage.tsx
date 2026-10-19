@@ -9,7 +9,7 @@ export default function HomePage() {
       <section className="hero-layout">
         <div className="hero-copy">
           <div className="hero-kicker hero-reveal [animation-delay:80ms]">
-            <span className="status-dot" /> Disponível para novos projetos
+            <span className="status-dot" /> Aberto a novas oportunidades
           </div>
 
           <h1 className="hero-heading hero-reveal [animation-delay:140ms]">
@@ -40,19 +40,15 @@ export default function HomePage() {
             <span className="terminal-dot terminal-dot-green" />
             <span className="terminal-title">portfolio.tsx</span>
           </div>
-          <pre className="terminal-code">
+          <pre className="terminal-code terminal-typing">
             <code>
-              <span className="code-muted">01 </span>
-              <span className="code-purple">export default</span>{" "}
-              <span className="code-blue">function</span> Portfolio() {"{\n"}
-              <span className="code-muted">02 </span>  <span className="code-purple">return</span> ({"{\n"}
-              <span className="code-muted">03 </span>    &lt;<span className="code-blue">main</span>{"\n"}
-              <span className="code-muted">04 </span>      className=<span className="code-green">"hero"</span>{"\n"}
-              <span className="code-muted">05 </span>    &gt;{"\n"}
-              <span className="code-muted">06 </span>      &lt;h1&gt;Ideias que ganham vida.&lt;/h1&gt;{"\n"}
-              <span className="code-muted">07 </span>    &lt;/<span className="code-blue">main</span>&gt;{"\n"}
-              <span className="code-muted">08 </span>  );{"\n"}
-              <span className="code-muted">09 </span>{"}"}
+              <span className="terminal-line"><span className="code-muted">01</span><span className="terminal-content"><span className="code-purple">export default</span>{" "}<span className="code-blue">function</span> Portfolio() {'{'}</span></span>
+              <span className="terminal-line"><span className="code-muted">02</span><span className="terminal-content">  <span className="code-purple">return</span> ({'{'}</span></span>
+              <span className="terminal-line"><span className="code-muted">03</span><span className="terminal-content">    &lt;<span className="code-blue">main</span> className=<span className="code-green">"hero"</span>&gt;</span></span>
+              <span className="terminal-line"><span className="code-muted">04</span><span className="terminal-content">      &lt;h1&gt;Ideias que ganham vida.&lt;/h1&gt;</span></span>
+              <span className="terminal-line"><span className="code-muted">05</span><span className="terminal-content">    &lt;/<span className="code-blue">main</span>&gt;</span></span>
+              <span className="terminal-line"><span className="code-muted">06</span><span className="terminal-content">  );</span></span>
+              <span className="terminal-line terminal-last-line"><span className="code-muted">09</span><span className="terminal-content">{'}'}</span></span>
             </code>
           </pre>
         </div>

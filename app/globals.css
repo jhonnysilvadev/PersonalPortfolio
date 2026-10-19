@@ -150,7 +150,7 @@ body {
   max-width: 9ch;
   margin: 0;
   color: #f4f0e9;
-  font-size: clamp(3.2rem, 6.5vw, 5.8rem);
+  font-size: clamp(3rem, 6vw, 5rem);
   font-weight: 700;
   letter-spacing: -0.055em;
   line-height: 0.98;
@@ -256,17 +256,102 @@ body {
   font-size: 0.72rem;
 }
 
-.terminal-code {
-  margin: 0;
+.terminal-typing {
+  position: relative;
+  min-height: 13rem;
+  overflow: hidden;
   padding: 1.5rem clamp(1rem, 3vw, 2rem) 1.8rem;
-  overflow: auto;
   color: #d6deeb;
   font-family: var(--font-geist-mono), monospace;
   font-size: clamp(0.66rem, 1.1vw, 0.82rem);
   line-height: 2;
 }
 
-.code-muted { color: #596273; }
+.terminal-code {
+  margin: 0;
+  tab-size: 2;
+  white-space: pre;
+}
+
+.terminal-code code {
+  display: block;
+  white-space: inherit;
+}
+
+.terminal-line {
+  display: grid;
+  grid-template-columns: 3ch max-content;
+  column-gap: 1.2ch;
+  width: max-content;
+  white-space: nowrap;
+  min-height: 1.9em;
+  letter-spacing: 0.01em;
+  clip-path: inset(0 100% 0 0);
+  animation: terminalLineTyping 4s steps(var(--terminal-steps), end) infinite;
+}
+
+.terminal-line:nth-child(1) { --terminal-steps: 43; animation-delay: 0s; }
+.terminal-line:nth-child(2) { --terminal-steps: 21; animation-delay: 150ms; }
+.terminal-line:nth-child(3) { --terminal-steps: 19; animation-delay: 300ms; }
+.terminal-line:nth-child(4) { --terminal-steps: 30; animation-delay: 450ms; }
+.terminal-line:nth-child(5) { --terminal-steps: 9; animation-delay: 600ms; }
+.terminal-line:nth-child(6) { --terminal-steps: 54; animation-delay: 750ms; }
+.terminal-line:nth-child(7) { --terminal-steps: 26; animation-delay: 900ms; }
+.terminal-line:nth-child(8) { --terminal-steps: 11; animation-delay: 1.05s; }
+.terminal-line:nth-child(9) { --terminal-steps: 5; animation-delay: 1.2s; }
+
+.terminal-last-line::after {
+  content: "";
+  display: inline-block;
+  width: 0.5rem;
+  height: 1.05em;
+  margin-left: 0.25rem;
+  vertical-align: -0.15em;
+  background: #9db5c9;
+  animation: terminalCursor 800ms steps(1, end) infinite;
+}
+
+@keyframes terminalLineTyping {
+  0%,
+  8% {
+    clip-path: inset(0 100% 0 0);
+  }
+
+  38%,
+  72% {
+    clip-path: inset(0 0 0 0);
+  }
+
+  92%,
+  100% {
+    clip-path: inset(0 100% 0 0);
+  }
+}
+
+@keyframes terminalCursor {
+  0%,
+  49% {
+    opacity: 1;
+  }
+
+  50%,
+  100% {
+    opacity: 0;
+  }
+}
+
+.code-muted {
+  display: block;
+  width: 3ch;
+  color: #596273;
+  user-select: none;
+  text-align: right;
+}
+
+.terminal-content {
+  display: block;
+}
+
 .code-purple { color: #c792ea; }
 .code-blue { color: #82aaff; }
 .code-green { color: #c3e88d; }
