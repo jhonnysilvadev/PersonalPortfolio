@@ -139,7 +139,7 @@ body {
 .hero-description {
   max-width: 28rem;
   margin: 0;
-  color: #4d514d;
+  color: #4d514d !important;
   font-size: 1rem;
   line-height: 1.5rem;
 }

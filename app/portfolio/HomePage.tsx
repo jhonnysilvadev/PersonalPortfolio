@@ -3,7 +3,6 @@ import ContactForm from "./ContactForm";
 
 const GITHUB_USERNAME = "jhonnysilvadev";
 const EXCLUDED_REPOSITORIES = new Set(["personalportfolio", "jhonnysilvadev"]);
-const SELECTED_REPOSITORIES = new Set(["MusicPreview"]);
 const PROJECT_DOMAINS: Record<string, string> = {
   // "nome-do-repositorio": "https://o-teu-dominio.pt",
   "MusicPreview": "https://musicpreview.jhonnysilva.pt",
@@ -16,6 +15,7 @@ type GitHubRepository = {
   description: string | null;
   language: string | null;
   updated_at: string;
+  private?: boolean;
   fork: boolean;
   archived: boolean;
 };
@@ -45,10 +45,10 @@ async function getProjects(): Promise<{
     return {
       projects: repositories.filter(
         (repository) =>
+          !repository.private &&
           !repository.fork &&
           !repository.archived &&
-          !EXCLUDED_REPOSITORIES.has(repository.name.toLowerCase()) &&
-          SELECTED_REPOSITORIES.has(repository.name),
+          !EXCLUDED_REPOSITORIES.has(repository.name.toLowerCase()),
       ),
       error: false,
     };
@@ -84,7 +84,7 @@ export default async function HomePage() {
                 <br />
                 &amp; designer
               </p>
-              <p className="hero-description">
+              <p className="hero-description ">
                 Faço sites e interfaces para pessoas com ideias boas e pouco
                 interesse em complicar o que é simples.
               </p>
