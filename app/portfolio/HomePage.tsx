@@ -1,4 +1,5 @@
 import Navbar from "../Components/navbar";
+import ArrowUpRight from "../Components/ArrowUpRight";
 import ContactForm from "./ContactForm";
 
 const GITHUB_USERNAME = "jhonnysilvadev";
@@ -167,7 +168,7 @@ export default async function HomePage() {
                   <div className="flex items-center justify-between sm:justify-end">
                     <span className="text-xs text-[#858981]">{new Date(project.updated_at).getFullYear()}</span>
                     {PROJECT_DOMAINS[project.name] && (
-                      <span className="text-2xl text-[#6b2737] transition-transform duration-300 group-hover:translate-x-1 group-hover:-translate-y-1">↗</span>
+                      <span className="text-2xl text-[#6b2737] transition-transform duration-300 group-hover:translate-x-1 group-hover:-translate-y-1"><ArrowUpRight /></span>
                     )}
                   </div>
                 </article>
@@ -206,7 +207,7 @@ export default async function HomePage() {
             </div>
             <a href="mailto:contacto@jhonnysilva.pt" className="group flex w-fit items-center gap-4 border-b border-[#161817] pb-3 text-sm font-semibold transition-colors hover:border-[#6b2737] hover:text-[#6b2737]">
               contacto@jhonnysilva.pt
-              <span className="text-xl transition-transform group-hover:translate-x-1 group-hover:-translate-y-1">↗</span>
+              <span className="text-xl transition-transform group-hover:translate-x-1 group-hover:-translate-y-1"><ArrowUpRight /></span>
             </a>
           </div>
           <ContactForm />
@@ -223,9 +224,9 @@ export default async function HomePage() {
           <div className="mt-10 flex flex-col gap-3 border-t border-[#161817]/10 pt-4 text-xs text-[#858981] sm:flex-row sm:items-center sm:justify-between">
             <span>© 2026 Jhonny Silva</span>
             <div className="flex gap-5">
-              <a href="https://github.com/jhonnysilvadev" target="_blank" rel="noreferrer" className="transition-colors hover:text-[#6b2737]">GitHub ↗</a>
-              <a href="https://www.linkedin.com/in/joaosiilva/" target="_blank" rel="noreferrer" className="transition-colors hover:text-[#6b2737]">LinkedIn ↗</a>
-              <a href="mailto:contacto@jhonnysilva.pt" className="transition-colors hover:text-[#6b2737]">Email ↗</a>
+              <a href="https://github.com/jhonnysilvadev" target="_blank" rel="noreferrer" className="transition-colors hover:text-[#6b2737]">GitHub <ArrowUpRight /></a>
+              <a href="https://www.linkedin.com/in/joaosiilva/" target="_blank" rel="noreferrer" className="transition-colors hover:text-[#6b2737]">LinkedIn <ArrowUpRight /></a>
+              <a href="mailto:contacto@jhonnysilva.pt" className="transition-colors hover:text-[#6b2737]">Email <ArrowUpRight /></a>
             </div>
           </div>
         </footer>

@@ -1,15 +1,27 @@
-import type { Metadata } from "next";
+import Script from "next/script";
 import HomePage from "./portfolio/HomePage";
 
-export const metadata: Metadata = {
-  title: "<Jhonny Silva/>",
-  description: "Portfolio de Jhonny Silva, desenvolvedor front-end. Projetos WEB",
-  openGraph: {
-    title: "<Jhonny Silva/> | Desenvolvedor Front-end",
-    description: "Portfolio de Jhonny Silva, desenvolvedor front-end. Projetos WEB",
-  },
-};
-
 export default function Page() {
-  return <HomePage />;
+  const personSchema = {
+    "@context": "https://schema.org",
+    "@type": "Person",
+    name: "Jhonny Silva",
+    jobTitle: "Desenvolvedor Front-end",
+    url: "https://jhonnysilva.pt",
+    sameAs: [
+      "https://github.com/jhonnysilvadev",
+      "https://www.linkedin.com/in/joaosiilva/",
+    ],
+  };
+
+  return (
+    <>
+      <Script
+        id="person-schema"
+        type="application/ld+json"
+        dangerouslySetInnerHTML={{ __html: JSON.stringify(personSchema) }}
+      />
+      <HomePage />
+    </>
+  );
 }

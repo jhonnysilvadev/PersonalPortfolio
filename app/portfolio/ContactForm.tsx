@@ -1,6 +1,7 @@
 "use client";
 
 import { FormEvent, useState } from "react";
+import ArrowUpRight from "../Components/ArrowUpRight";
 
 export default function ContactForm() {
   const [status, setStatus] = useState<"idle" | "sending" | "success" | "error">("idle");
@@ -148,7 +149,7 @@ export default function ContactForm() {
           className="group inline-flex items-center gap-3 rounded-full bg-[#161817] px-5 py-3 text-sm font-semibold text-[#f1efe9] transition-all duration-300 hover:-translate-y-0.5 hover:bg-[#6b2737] hover:shadow-[0_6px_18px_rgba(107,39,55,0.16)] active:translate-y-0 active:shadow-none disabled:cursor-wait disabled:opacity-60"
         >
           {status === "sending" ? "A enviar..." : "Enviar mensagem"}
-          <span aria-hidden="true">↗</span>
+          <ArrowUpRight />
         </button>
         {status === "success" && (
           <p role="status" className="border-l-2 border-[#86a889] pl-3 text-sm leading-5 text-[#4d5950]">
