@@ -30,16 +30,16 @@ export default function Navbar() {
         <div className={`${isMenuOpen ? "flex" : "hidden"} absolute left-0 right-0 top-[calc(100%_+_0.75rem)] z-[1] flex-col items-stretch gap-3 rounded-2xl border border-[#161817]/15 bg-[#f1efe9] p-3 shadow-[0_20px_45px_rgba(22,24,23,0.2)] min-[761px]:contents`} id="navGroup">
           <div className="flex w-fit items-center gap-1 rounded-full border border-[#161817]/15 bg-[#f1efe9]/80 p-[0.35rem_0.45rem] shadow-[0_10px_30px_-10px_rgba(22,24,23,0.25)] backdrop-blur-2xl max-[760px]:w-full max-[760px]:flex-col max-[760px]:rounded-[25px]">
             <a href="#home" className="w-full whitespace-nowrap rounded-full bg-[#161817] px-[1.15rem] py-[0.45rem] text-center text-[0.9rem] font-semibold text-[#f1efe9] shadow-[0_2px_10px_rgba(22,24,23,0.15)] min-[761px]:w-auto" onClick={closeMenu}>
-              Home
+              Inicio
             </a>
             <a href="#projects" className="w-full whitespace-nowrap rounded-full px-[1.15rem] py-[0.45rem] text-center text-[0.9rem] font-medium text-[#686b67] transition-colors hover:text-[#6b2737] max-[760px]:py-3 min-[761px]:w-auto" onClick={closeMenu}>
-              Projects
+              Projetos
             </a>
             <a href="#about" className="w-full whitespace-nowrap rounded-full px-[1.15rem] py-[0.45rem] text-center text-[0.9rem] font-medium text-[#686b67] transition-colors hover:text-[#6b2737] max-[760px]:py-3 min-[761px]:w-auto" onClick={closeMenu}>
-              About
+              Sobre
             </a>
             <a href="#contact" className="w-full whitespace-nowrap rounded-full px-[1.15rem] py-[0.45rem] text-center text-[0.9rem] font-medium text-[#686b67] transition-colors hover:text-[#6b2737] max-[760px]:py-3 min-[761px]:w-auto" onClick={closeMenu}>
-              Contact
+              Contacto
             </a>
           </div>
 
