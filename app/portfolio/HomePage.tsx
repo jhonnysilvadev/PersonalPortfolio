@@ -40,9 +40,14 @@ function getProjectDomains(): Record<string, string> {
     }
 
     return Object.fromEntries(
-      Object.entries(parsedProjectDomains).filter(
-        ([, url]) => typeof url === "string" && url.startsWith("https://"),
-      ),
+      Object.entries(parsedProjectDomains)
+        .map(([projectName, url]) => [
+          projectName.trim(),
+          typeof url === "string" ? url.trim() : url,
+        ])
+        .filter(
+          ([, url]) => typeof url === "string" && url.startsWith("https://"),
+        ) as [string, string][],
     );
   } catch (error) {
     console.warn(
@@ -55,11 +60,12 @@ function getProjectDomains(): Record<string, string> {
 
 function getProjectDomain(
   projectDomains: Record<string, string>,
-  repositoryName: string,
+  repository: Pick<GitHubRepository, "id" | "name">,
 ): string | undefined {
   const matchingDomain = Object.entries(projectDomains).find(
-    ([projectName]) =>
-      projectName.toLowerCase() === repositoryName.toLowerCase(),
+    ([projectKey]) =>
+      projectKey === String(repository.id) ||
+      projectKey.trim().toLowerCase() === repository.name.trim().toLowerCase(),
   );
 
   return matchingDomain?.[1];
@@ -126,13 +132,13 @@ export default async function HomePage() {
 
             <div className="hero-intro">
               <p className="hero-role">
-                Developer
+                Front-end
                 <br />
-                &amp; designer
+                Developer
               </p>
               <p className="hero-description ">
-                Faço sites e interfaces para pessoas com ideias boas e pouco
-                interesse em complicar o que é simples.
+                Faço sites e interfaces para quem tem uma boa ideia
+                e não quer andar às voltas com coisas desnecessárias.
               </p>
             </div>
           </div>
@@ -197,7 +203,7 @@ export default async function HomePage() {
               projects.map((project, index) => {
                 const projectUrl = getProjectDomain(
                   projectDomains,
-                  project.name,
+                  project,
                 );
                 const projectContent = (
                   <article className="grid gap-5 py-7 sm:grid-cols-[4rem_1.1fr_1fr_5rem] sm:items-center sm:gap-8 sm:px-4 sm:py-8">
@@ -265,17 +271,14 @@ export default async function HomePage() {
           </p>
           <div>
             <p className="max-w-3xl text-[clamp(2rem,4vw,4rem)] font-medium leading-[0.98] tracking-[-0.07em]">
-              Ainda estou a descobrir qual é a melhor maneira de fazer as
-              coisas. É essa a parte interessante.
+              Ainda não sei bem qual é a melhor maneira de fazer isto tudo, mas é aí que está a piada.
             </p>
             <div className="mt-12 grid gap-8 border-t border-[#161817]/20 pt-6 text-sm leading-6 text-[#686b67] sm:grid-cols-2">
               <p>
-                Gosto de interfaces que não precisam de instruções e de código
-                que continua compreensível passado algum tempo.
+                Gosto de interfaces que se usam sem ninguém explicar nada, e de código que consigo ler daqui a seis meses sem praguejar.
               </p>
               <p>
-                Quando não estou a programar, provavelmente estou a observar
-                como outras pessoas resolveram o mesmo problema.
+                Quando não estou a programar, estou a ver como é que os outros resolveram o mesmo problema. Fico ali um bom bocado.
               </p>
             </div>
           </div>

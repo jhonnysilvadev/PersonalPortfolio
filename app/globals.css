@@ -70,7 +70,7 @@ body {
 .portfolio-hero {
   position: relative;
   display: grid;
-  min-height: calc(100svh - 4rem);
+  min-height: min(calc(100svh - 4rem), 52rem);
   grid-template-columns: 1fr;
   align-items: center;
   gap: 2.5rem;
@@ -100,7 +100,6 @@ body {
   height: 0.5rem;
   border-radius: 50%;
   background: #6b2737;
-  animation: pulse 2s ease-in-out infinite;
 }
 
 .hero-title {
@@ -436,9 +435,16 @@ body {
   }
 }
 
+@media (max-width: 639px) and (min-height: 760px) {
+  .portfolio-hero {
+    align-content: start;
+    min-height: min(82svh, 42rem);
+  }
+}
+
 @media (min-width: 1024px) {
   .portfolio-hero {
-    min-height: calc(100vh - 5rem);
+    min-height: min(calc(100svh - 5rem), 52rem);
     grid-template-columns: 1.3fr 0.7fr;
     gap: 2rem;
     padding-top: 10rem;
