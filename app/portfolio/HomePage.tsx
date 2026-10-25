@@ -9,6 +9,7 @@ type GitHubRepository = {
   id: number;
   name: string;
   html_url: string;
+  homepage: string | null;
   description: string | null;
   language: string | null;
   topics: string[];
@@ -23,7 +24,7 @@ function getProjectDomains(): Record<string, string> {
 
   if (!rawProjectDomains) {
     console.warn(
-      "PROJECT_DOMAINS is not configured; project links will be omitted.",
+      "PROJECT_DOMAINS is not configured; custom project domains will be skipped.",
     );
     return {};
   }
@@ -69,6 +70,17 @@ function getProjectDomain(
   );
 
   return matchingDomain?.[1];
+}
+
+function getProjectUrl(
+  projectDomains: Record<string, string>,
+  project: GitHubRepository,
+): string {
+  return (
+    getProjectDomain(projectDomains, project) ??
+    (project.homepage?.startsWith("https://") ? project.homepage : undefined) ??
+    project.html_url
+  );
 }
 
 async function getProjects(): Promise<{
@@ -201,10 +213,7 @@ export default async function HomePage() {
               </p>
             ) : projects.length > 0 ? (
               projects.map((project, index) => {
-                const projectUrl = getProjectDomain(
-                  projectDomains,
-                  project,
-                );
+                const projectUrl = getProjectUrl(projectDomains, project);
                 const projectContent = (
                   <article className="grid gap-5 py-7 sm:grid-cols-[4rem_1.1fr_1fr_5rem] sm:items-center sm:gap-8 sm:px-4 sm:py-8">
                     <span className="font-mono text-xs text-[#858981]">
