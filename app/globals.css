@@ -435,6 +435,12 @@ body {
   }
 }
 
+@media (max-width: 639px) {
+  .hero-title span {
+    margin-left: 26vw;
+  }
+}
+
 @media (max-width: 639px) and (min-height: 760px) {
   .portfolio-hero {
     align-content: start;

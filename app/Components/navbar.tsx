@@ -10,7 +10,7 @@ export default function Navbar() {
   return (
     <div className="fixed left-1/2 top-0 z-[1000] w-[calc(100%_-_2.5rem)] max-w-[1100px] -translate-x-1/2 pt-5 max-[760px]:w-[calc(100%_-_1.5rem)] max-[760px]:pt-3">
       <nav className="relative flex w-full items-center justify-between gap-4">
-        <a href="#" className="inline-flex w-fit items-center whitespace-nowrap rounded-full border border-[#161817]/15 bg-[#f1efe9]/80 px-[1.4rem] py-[0.65rem] text-[0.95rem] font-bold tracking-[-0.01em] text-[#161817] shadow-[0_10px_30px_-10px_rgba(22,24,23,0.25)] backdrop-blur-2xl transition-all duration-200 hover:border-[#6b2737]/60 hover:bg-[#f8f7f2]">
+        <a href="#" className="inline-flex w-fit items-center whitespace-nowrap rounded-full border border-[#161817]/15 bg-[#f1efe9]/80 px-[1.4rem] py-[0.65rem] text-[0.95rem] font-bold tracking-[-0.01em] text-[#161817] shadow-[0_10px_30px_-10px_rgba(22,24,23,0.25)] backdrop-blur-2xl transition-all duration-200 hover:border-[#6b2737]/60 hover:bg-[#f8f7f2] max-[760px]:h-[42px] max-[760px]:flex-1 max-[760px]:justify-start max-[760px]:py-0">
           {"<Jhonny Silva/>"}
         </a>
 
