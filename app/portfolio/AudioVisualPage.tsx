@@ -6,8 +6,16 @@ import ArrowUpRight from "../Components/ArrowUpRight";
 import type { CSSProperties } from "react";
 import { useEffect, useRef, useState } from "react";
 
-const audiovisualProjects = [
-  {
+type AudiovisualProject = {
+  number: string;
+  title: string;
+  description: string;
+  tag: string;
+  video: string;
+};
+
+const audiovisualProjects: AudiovisualProject[] = [
+  /*{
     number: "01",
     title: "Captação e edição",
     description:
@@ -33,13 +41,12 @@ const audiovisualProjects = [
     tag: "Conceito / Direção",
     video:
       "https://interactive-examples.mdn.mozilla.net/media/cc0-videos/flower.mp4",
-  },
+  },*/
 ];
 
 export default function AudioVisualPage() {
-  const [selectedProject, setSelectedProject] = useState<
-    (typeof audiovisualProjects)[number] | null
-  >(null);
+  const [selectedProject, setSelectedProject] =
+    useState<AudiovisualProject | null>(null);
   const [isPlaying, setIsPlaying] = useState(false);
   const [progress, setProgress] = useState(0);
   const [duration, setDuration] = useState(0);
@@ -235,7 +242,7 @@ export default function AudioVisualPage() {
           </div>
         </section>
 
-        <Footer topHref="#audiovisual" />
+        <Footer />
       </div>
 
       {selectedProject && (
