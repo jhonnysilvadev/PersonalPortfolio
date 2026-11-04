@@ -213,36 +213,59 @@ export default function AudioVisualPage() {
           </div>
 
           <div className="border-t border-[#161817]/20">
-            {audiovisualProjects.map((project) => (
-              <button
-                key={project.number}
-                type="button"
-                onClick={() => setSelectedProject(project)}
-                className="group grid w-full gap-5 border-b border-[#161817]/20 py-7 text-left transition-colors hover:bg-[#e9e6de] sm:grid-cols-[4rem_1.1fr_1fr_5rem] sm:items-center sm:gap-8 sm:px-4 sm:py-8"
-              >
-                <span className="font-mono text-xs text-[#858981]">
-                  {project.number}
-                </span>
+            {audiovisualProjects.length > 0 ? (
+              audiovisualProjects.map((project) => (
+                <button
+                  key={project.number}
+                  type="button"
+                  onClick={() => setSelectedProject(project)}
+                  className="group grid w-full gap-5 border-b border-[#161817]/20 py-7 text-left transition-colors hover:bg-[#e9e6de] sm:grid-cols-[4rem_1.1fr_1fr_5rem] sm:items-center sm:gap-8 sm:px-4 sm:py-8"
+                >
+                  <span className="font-mono text-xs text-[#858981]">
+                    {project.number}
+                  </span>
+                  <div>
+                    <h3 className="text-2xl font-medium tracking-[-0.05em] text-[#161817] sm:text-3xl">
+                      {project.title}
+                    </h3>
+                    <p className="mt-2 text-xs uppercase tracking-[0.12em] text-[#6b2737]">
+                      {project.tag}
+                    </p>
+                  </div>
+                  <p className="max-w-sm text-sm leading-6 text-[#686b67]">
+                    {project.description}
+                  </p>
+                  <span className="text-2xl text-[#6b2737] transition-transform duration-300 group-hover:translate-x-1 group-hover:-translate-y-1">
+                    <ArrowUpRight />
+                  </span>
+                </button>
+              ))
+            ) : (
+              <div className="flex flex-col gap-6 border-b border-[#161817]/20 py-10 sm:flex-row sm:items-center sm:justify-between sm:py-12">
                 <div>
-                  <h3 className="text-2xl font-medium tracking-[-0.05em] text-[#161817] sm:text-3xl">
-                    {project.title}
-                  </h3>
-                  <p className="mt-2 text-xs uppercase tracking-[0.12em] text-[#6b2737]">
-                    {project.tag}
+                  <p className="font-mono text-xs uppercase tracking-[0.18em] text-[#6b2737]">
+                    Em breve
+                  </p>
+                  <p className="mt-3 max-w-xl text-2xl font-medium leading-tight tracking-[-0.05em] text-[#161817] sm:text-3xl">
+                    Estou a preparar novos vídeos para mostrar aqui.
+                  </p>
+                  <p className="mt-3 max-w-lg text-sm leading-6 text-[#686b67]">
+                    Enquanto isso, fala comigo sobre o teu próximo projeto.
                   </p>
                 </div>
-                <p className="max-w-sm text-sm leading-6 text-[#686b67]">
-                  {project.description}
-                </p>
-                <span className="text-2xl text-[#6b2737] transition-transform duration-300 group-hover:translate-x-1 group-hover:-translate-y-1">
+                <a
+                  href="mailto:contacto@jhonnysilva.pt"
+                  className="group flex w-fit shrink-0 items-center gap-3 rounded-full bg-[#161817] px-5 py-3 text-xs font-semibold uppercase tracking-[0.1em] text-[#f1efe9] transition-colors hover:bg-[#6b2737]"
+                >
+                  Entrar em contacto
                   <ArrowUpRight />
-                </span>
-              </button>
-            ))}
+                </a>
+              </div>
+            )}
           </div>
         </section>
 
-        <Footer />
+        <Footer topHref="#audiovisual" />
       </div>
 
       {selectedProject && (
