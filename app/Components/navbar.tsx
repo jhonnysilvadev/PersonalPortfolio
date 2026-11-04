@@ -1,18 +1,23 @@
 "use client";
 
+import { usePathname } from "next/navigation";
+import Link from "next/link";
 import { useState } from "react";
 
 export default function Navbar() {
+  const pathname = usePathname();
   const [isMenuOpen, setIsMenuOpen] = useState(false);
 
   const closeMenu = () => setIsMenuOpen(false);
+  const isAudioVisualPage = pathname === "./audiovisual";
+  const isHomePage = pathname === "/";
 
   return (
     <div className="fixed left-1/2 top-0 z-[1000] w-[calc(100%_-_2.5rem)] max-w-[1100px] -translate-x-1/2 pt-5 max-[760px]:w-[calc(100%_-_1.5rem)] max-[760px]:pt-3">
       <nav className="relative flex w-full items-center justify-between gap-4">
-        <a href="#" className="inline-flex w-fit items-center whitespace-nowrap rounded-full border border-[#161817]/15 bg-[#f1efe9]/80 px-[1.4rem] py-[0.65rem] text-[0.95rem] font-bold tracking-[-0.01em] text-[#161817] shadow-[0_10px_30px_-10px_rgba(22,24,23,0.25)] backdrop-blur-2xl transition-all duration-200 hover:border-[#6b2737]/60 hover:bg-[#f8f7f2] max-[760px]:h-[42px] max-[760px]:flex-1 max-[760px]:justify-start max-[760px]:py-0">
+        <Link href="/#home" className="inline-flex w-fit items-center whitespace-nowrap rounded-full border border-[#161817]/15 bg-[#f1efe9]/80 px-[1.4rem] py-[0.65rem] text-[0.95rem] font-bold tracking-[-0.01em] text-[#161817] shadow-[0_10px_30px_-10px_rgba(22,24,23,0.25)] backdrop-blur-2xl transition-all duration-200 hover:border-[#6b2737]/60 hover:bg-[#f8f7f2] max-[760px]:h-[42px] max-[760px]:flex-1 max-[760px]:justify-start max-[760px]:py-0">
           {"<Jhonny Silva/>"}
-        </a>
+        </Link>
 
         <button
           className="z-[2] hidden h-[42px] w-[42px] cursor-pointer flex-col items-center justify-center gap-[5px] rounded-full border border-[#161817]/15 bg-[#f1efe9]/80 backdrop-blur-xl max-[760px]:flex"
@@ -29,18 +34,21 @@ export default function Navbar() {
 
         <div className={`${isMenuOpen ? "flex" : "hidden"} absolute left-0 right-0 top-[calc(100%_+_0.75rem)] z-[1] flex-col items-stretch gap-3 rounded-2xl border border-[#161817]/15 bg-[#f1efe9] p-3 shadow-[0_20px_45px_rgba(22,24,23,0.2)] min-[761px]:contents`} id="navGroup">
           <div className="flex w-fit items-center gap-1 rounded-full border border-[#161817]/15 bg-[#f1efe9]/80 p-[0.35rem_0.45rem] shadow-[0_10px_30px_-10px_rgba(22,24,23,0.25)] backdrop-blur-2xl max-[760px]:w-full max-[760px]:flex-col max-[760px]:rounded-[25px]">
-            <a href="#home" className="w-full whitespace-nowrap rounded-full bg-[#161817] px-[1.15rem] py-[0.45rem] text-center text-[0.9rem] font-semibold text-[#f1efe9] shadow-[0_2px_10px_rgba(22,24,23,0.15)] min-[761px]:w-auto" onClick={closeMenu}>
+            <Link href="/" className={`w-full whitespace-nowrap rounded-full px-[1.15rem] py-[0.45rem] text-center text-[0.9rem] transition-colors max-[760px]:py-3 min-[761px]:w-auto ${isHomePage && !isAudioVisualPage ? "bg-[#161817] font-semibold text-[#f1efe9] shadow-[0_2px_10px_rgba(22,24,23,0.15)]" : "font-medium text-[#686b67] hover:text-[#6b2737]"}`} onClick={closeMenu}>
               Inicio
-            </a>
-            <a href="#projects" className="w-full whitespace-nowrap rounded-full px-[1.15rem] py-[0.45rem] text-center text-[0.9rem] font-medium text-[#686b67] transition-colors hover:text-[#6b2737] max-[760px]:py-3 min-[761px]:w-auto" onClick={closeMenu}>
+            </Link>
+            <a href={isHomePage ? "#projects" : "/#projects"} className="w-full whitespace-nowrap rounded-full px-[1.15rem] py-[0.45rem] text-center text-[0.9rem] font-medium text-[#686b67] transition-colors hover:text-[#6b2737] max-[760px]:py-3 min-[761px]:w-auto" onClick={closeMenu}>
               Projetos
             </a>
-            <a href="#about" className="w-full whitespace-nowrap rounded-full px-[1.15rem] py-[0.45rem] text-center text-[0.9rem] font-medium text-[#686b67] transition-colors hover:text-[#6b2737] max-[760px]:py-3 min-[761px]:w-auto" onClick={closeMenu}>
+            <a href={isHomePage ? "#about" : "/#about"} className="w-full whitespace-nowrap rounded-full px-[1.15rem] py-[0.45rem] text-center text-[0.9rem] font-medium text-[#686b67] transition-colors hover:text-[#6b2737] max-[760px]:py-3 min-[761px]:w-auto" onClick={closeMenu}>
               Sobre
             </a>
-            <a href="#contact" className="w-full whitespace-nowrap rounded-full px-[1.15rem] py-[0.45rem] text-center text-[0.9rem] font-medium text-[#686b67] transition-colors hover:text-[#6b2737] max-[760px]:py-3 min-[761px]:w-auto" onClick={closeMenu}>
+            <a href={isHomePage ? "#contact" : "/#contact"} className="w-full whitespace-nowrap rounded-full px-[1.15rem] py-[0.45rem] text-center text-[0.9rem] font-medium text-[#686b67] transition-colors hover:text-[#6b2737] max-[760px]:py-3 min-[761px]:w-auto" onClick={closeMenu}>
               Contacto
             </a>
+            <Link href="/audiovisual" className={`w-full whitespace-nowrap rounded-full px-[1.15rem] py-[0.45rem] text-center text-[0.9rem] transition-colors max-[760px]:py-3 min-[761px]:w-auto ${isAudioVisualPage ? "bg-[#161817] font-semibold text-[#f1efe9] shadow-[0_2px_10px_rgba(22,24,23,0.15)]" : "font-medium text-[#686b67] hover:text-[#6b2737]"}`} onClick={closeMenu}>
+              AudioVisual
+            </Link>
           </div>
 
           <div className="flex w-fit items-center gap-[0.85rem] rounded-full border border-[#161817]/15 bg-[#f1efe9]/80 px-[1.1rem] py-[0.65rem] shadow-[0_10px_30px_-10px_rgba(22,24,23,0.25)] backdrop-blur-2xl max-[760px]:w-full max-[760px]:justify-center">

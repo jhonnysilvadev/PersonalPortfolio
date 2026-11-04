@@ -347,6 +347,60 @@ body {
   text-transform: none;
 }
 
+.video-progress,
+.video-volume {
+  height: 0.25rem;
+  appearance: none;
+  border-radius: 999px;
+  background: rgb(241 239 233 / 30%);
+  cursor: pointer;
+}
+
+.video-progress::-webkit-slider-thumb,
+.video-volume::-webkit-slider-thumb {
+  width: 0.8rem;
+  height: 0.8rem;
+  appearance: none;
+  border: 2px solid #f1efe9;
+  border-radius: 50%;
+  background: #6b2737;
+}
+
+.video-progress::-moz-range-thumb,
+.video-volume::-moz-range-thumb {
+  width: 0.65rem;
+  height: 0.65rem;
+  border: 2px solid #f1efe9;
+  border-radius: 50%;
+  background: #6b2737;
+}
+
+.video-progress {
+  background: linear-gradient(
+    to right,
+    #6b2737 var(--video-progress, 0%),
+    rgb(241 239 233 / 30%) var(--video-progress, 0%)
+  );
+}
+
+.video-control-button {
+  display: grid;
+  width: 2rem;
+  height: 2rem;
+  place-items: center;
+  border-radius: 50%;
+  color: #f1efe9;
+  font-size: 0.75rem;
+  transition:
+    background 200ms ease,
+    color 200ms ease;
+}
+
+.video-control-button:hover {
+  background: #6b2737;
+  color: #f1efe9;
+}
+
 .contact-form-trap {
   position: absolute;
   width: 1px;

@@ -1,4 +1,5 @@
 import Navbar from "../Components/navbar";
+import Footer from "../Components/footer";
 import ArrowUpRight from "../Components/ArrowUpRight";
 import ContactForm from "./ContactForm";
 
@@ -144,13 +145,13 @@ export default async function HomePage() {
 
             <div className="hero-intro">
               <p className="hero-role">
-                Front-end
+                MULTIMÉDIA
                 <br />
-                Developer
+                & FRONT-END
               </p>
               <p className="hero-description ">
-                Faço sites e interfaces para quem tem uma boa ideia
-                e não quer andar às voltas com coisas desnecessárias.
+                Crio conteúdos visuais, interfaces e
+                soluções digitais focadas no essencial e sem rodeios.
               </p>
             </div>
           </div>
@@ -284,10 +285,10 @@ export default async function HomePage() {
             </p>
             <div className="mt-12 grid gap-8 border-t border-[#161817]/20 pt-6 text-sm leading-6 text-[#686b67] sm:grid-cols-2">
               <p>
-                Gosto de interfaces que se usam sem ninguém explicar nada, e de código que consigo ler daqui a seis meses sem praguejar.
+                Gosto de coisas que funcionam sem ninguém ter de explicar: seja um vídeo com o ritmo certo que prende à primeira, ou código limpo que consigo rever daqui a seis meses sem praguejar.
               </p>
               <p>
-                Quando não estou a programar, estou a ver como é que os outros resolveram o mesmo problema. Fico ali um bom bocado.
+                Quando não estou a criar ou a editar, estou a ver referências, bastidores e como é que outros resolveram o mesmo problema técnico ou visual. Fico ali um bom bocado.
               </p>
             </div>
           </div>
@@ -321,55 +322,7 @@ export default async function HomePage() {
           <ContactForm />
         </section>
 
-        <footer className="border-t border-[#161817]/20 pb-8 pt-10">
-          <div className="flex items-start justify-between gap-6">
-            <p className="font-mono text-[0.65rem] uppercase tracking-[0.18em] text-[#858981]">
-              Até já
-            </p>
-            <a
-              href="#home"
-              className="font-mono text-[0.65rem] uppercase tracking-[0.18em] text-[#858981] transition-colors hover:text-[#6b2737]"
-            >
-              Voltar ao topo ↑
-            </a>
-          </div>
-          <a
-            href="#home"
-            className="group mt-10 block pb-[0.12em] text-[clamp(4rem,17vw,13rem)] font-medium leading-[0.82] tracking-[-0.1em] text-[#161817] transition-colors hover:text-[#6b2737]"
-          >
-            Jhonny
-            <span className="text-[#6b2737] transition-colors group-hover:text-[#161817]">
-              .
-            </span>
-          </a>
-          <div className="mt-10 flex flex-col gap-3 border-t border-[#161817]/10 pt-4 text-xs text-[#858981] sm:flex-row sm:items-center sm:justify-between">
-            <span>© 2026 Jhonny Silva</span>
-            <div className="flex gap-5">
-              <a
-                href="https://github.com/jhonnysilvadev"
-                target="_blank"
-                rel="noreferrer"
-                className="transition-colors hover:text-[#6b2737]"
-              >
-                GitHub <ArrowUpRight />
-              </a>
-              <a
-                href="https://www.linkedin.com/in/joaosiilva/"
-                target="_blank"
-                rel="noreferrer"
-                className="transition-colors hover:text-[#6b2737]"
-              >
-                LinkedIn <ArrowUpRight />
-              </a>
-              <a
-                href="mailto:contacto@jhonnysilva.pt"
-                className="transition-colors hover:text-[#6b2737]"
-              >
-                Email <ArrowUpRight />
-              </a>
-            </div>
-          </div>
-        </footer>
+        <Footer />
       </div>
     </main>
   );
