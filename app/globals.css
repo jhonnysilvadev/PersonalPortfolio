@@ -415,6 +415,28 @@ body {
   left: -9999px;
 }
 
+@keyframes privacy-switch-activate {
+  0% {
+    transform: scale(1);
+  }
+  50% {
+    transform: scale(1.05);
+  }
+  100% {
+    transform: scale(1);
+  }
+}
+
+.peer:checked + .privacy-switch {
+  animation: privacy-switch-activate 220ms ease-out;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .peer:checked + .privacy-switch {
+    animation: none;
+  }
+}
+
 .contact-form input:-webkit-autofill,
 .contact-form input:-webkit-autofill:hover,
 .contact-form input:-webkit-autofill:focus,

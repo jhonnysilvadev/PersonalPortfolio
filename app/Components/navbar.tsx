@@ -2,16 +2,79 @@
 
 import { usePathname } from "next/navigation";
 import Link from "next/link";
-import { useState } from "react";
+import { MouseEvent, useEffect, useRef, useState } from "react";
 
 export default function Navbar() {
   const pathname = usePathname();
   const [isMenuOpen, setIsMenuOpen] = useState(false);
+  const [activeSection, setActiveSection] = useState("home");
+  const navigationTarget = useRef<string | null>(null);
 
   const closeMenu = () => setIsMenuOpen(false);
-  const isAudioVisualPage = pathname === "./audiovisual";
   const isHomePage = pathname === "/";
+  const navigateToSection = (event: MouseEvent<HTMLAnchorElement>, sectionId: string) => {
+    if (!isHomePage) {
+      closeMenu();
+      return;
+    }
 
+    event.preventDefault();
+    setActiveSection(sectionId);
+    navigationTarget.current = sectionId;
+    closeMenu();
+
+    if (sectionId === "home") {
+      window.scrollTo({ top: 0, behavior: "smooth" });
+      window.history.replaceState(null, "", "#home");
+      return;
+    }
+
+    document.getElementById(sectionId)?.scrollIntoView({
+      behavior: "smooth",
+      block: "start",
+    });
+    window.history.replaceState(null, "", `#${sectionId}`);
+  };
+
+  useEffect(() => {
+    if (!isHomePage) {
+      return;
+    }
+
+    const sectionIds = ["home", "projects", "about", "contact"];
+    const updateActiveSection = () => {
+      const currentPosition = window.scrollY + 160;
+      const targetId = navigationTarget.current;
+      const targetSection = targetId
+        ? document.getElementById(targetId)
+        : null;
+
+      if (targetSection) {
+        const targetPosition = targetSection.offsetTop + 160;
+        if (Math.abs(currentPosition - targetPosition) > 80) {
+          return;
+        }
+        navigationTarget.current = null;
+      }
+
+      const currentSection = sectionIds
+        .map((id) => document.getElementById(id))
+        .filter((section): section is HTMLElement => section !== null)
+        .filter((section) => section.offsetTop <= currentPosition)
+        .at(-1);
+
+      setActiveSection(currentSection?.id ?? "home");
+    };
+
+    updateActiveSection();
+    window.addEventListener("scroll", updateActiveSection, { passive: true });
+    window.addEventListener("resize", updateActiveSection);
+
+    return () => {
+      window.removeEventListener("scroll", updateActiveSection);
+      window.removeEventListener("resize", updateActiveSection);
+    };
+  }, [isHomePage]);
   return (
     <div className="fixed left-1/2 top-0 z-[1000] w-[calc(100%_-_2.5rem)] max-w-[1100px] -translate-x-1/2 pt-5 max-[760px]:w-[calc(100%_-_1.5rem)] max-[760px]:pt-3">
       <nav className="relative flex w-full items-center justify-between gap-4">
@@ -34,21 +97,18 @@ export default function Navbar() {
 
         <div className={`${isMenuOpen ? "flex" : "hidden"} absolute left-0 right-0 top-[calc(100%_+_0.75rem)] z-[1] flex-col items-stretch gap-3 rounded-2xl border border-[#161817]/15 bg-[#f1efe9] p-3 shadow-[0_20px_45px_rgba(22,24,23,0.2)] min-[761px]:contents`} id="navGroup">
           <div className="flex w-fit items-center gap-1 rounded-full border border-[#161817]/15 bg-[#f1efe9]/80 p-[0.35rem_0.45rem] shadow-[0_10px_30px_-10px_rgba(22,24,23,0.25)] backdrop-blur-2xl max-[760px]:w-full max-[760px]:flex-col max-[760px]:rounded-[25px]">
-            <Link href="/" className={`w-full whitespace-nowrap rounded-full px-[1.15rem] py-[0.45rem] text-center text-[0.9rem] transition-colors max-[760px]:py-3 min-[761px]:w-auto ${isHomePage && !isAudioVisualPage ? "bg-[#161817] font-semibold text-[#f1efe9] shadow-[0_2px_10px_rgba(22,24,23,0.15)]" : "font-medium text-[#686b67] hover:text-[#6b2737]"}`} onClick={closeMenu}>
+            <Link href={isHomePage ? "#home" : "/#home"} className={`w-full whitespace-nowrap rounded-full px-[1.15rem] py-[0.45rem] text-center text-[0.9rem] transition-colors max-[760px]:py-3 min-[761px]:w-auto ${activeSection === "home" ? "bg-[#161817] font-semibold text-[#f1efe9] shadow-[0_2px_10px_rgba(22,24,23,0.15)]" : "font-medium text-[#686b67] hover:text-[#6b2737]"}`} onClick={(event) => navigateToSection(event, "home")}>
               Inicio
             </Link>
-            <a href={isHomePage ? "#projects" : "/#projects"} className="w-full whitespace-nowrap rounded-full px-[1.15rem] py-[0.45rem] text-center text-[0.9rem] font-medium text-[#686b67] transition-colors hover:text-[#6b2737] max-[760px]:py-3 min-[761px]:w-auto" onClick={closeMenu}>
+            <a href={isHomePage ? "#projects" : "/#projects"} className={`w-full whitespace-nowrap rounded-full px-[1.15rem] py-[0.45rem] text-center text-[0.9rem] transition-colors max-[760px]:py-3 min-[761px]:w-auto ${activeSection === "projects" ? "bg-[#161817] font-semibold text-[#f1efe9] shadow-[0_2px_10px_rgba(22,24,23,0.15)]" : "font-medium text-[#686b67] hover:text-[#6b2737]"}`} onClick={(event) => navigateToSection(event, "projects")}>
               Projetos
             </a>
-            <a href={isHomePage ? "#about" : "/#about"} className="w-full whitespace-nowrap rounded-full px-[1.15rem] py-[0.45rem] text-center text-[0.9rem] font-medium text-[#686b67] transition-colors hover:text-[#6b2737] max-[760px]:py-3 min-[761px]:w-auto" onClick={closeMenu}>
+            <a href={isHomePage ? "#about" : "/#about"} className={`w-full whitespace-nowrap rounded-full px-[1.15rem] py-[0.45rem] text-center text-[0.9rem] transition-colors max-[760px]:py-3 min-[761px]:w-auto ${activeSection === "about" ? "bg-[#161817] font-semibold text-[#f1efe9] shadow-[0_2px_10px_rgba(22,24,23,0.15)]" : "font-medium text-[#686b67] hover:text-[#6b2737]"}`} onClick={(event) => navigateToSection(event, "about")}>
               Sobre
             </a>
-            <a href={isHomePage ? "#contact" : "/#contact"} className="w-full whitespace-nowrap rounded-full px-[1.15rem] py-[0.45rem] text-center text-[0.9rem] font-medium text-[#686b67] transition-colors hover:text-[#6b2737] max-[760px]:py-3 min-[761px]:w-auto" onClick={closeMenu}>
+            <a href={isHomePage ? "#contact" : "/#contact"} className={`w-full whitespace-nowrap rounded-full px-[1.15rem] py-[0.45rem] text-center text-[0.9rem] transition-colors max-[760px]:py-3 min-[761px]:w-auto ${activeSection === "contact" ? "bg-[#161817] font-semibold text-[#f1efe9] shadow-[0_2px_10px_rgba(22,24,23,0.15)]" : "font-medium text-[#686b67] hover:text-[#6b2737]"}`} onClick={(event) => navigateToSection(event, "contact")}>
               Contacto
             </a>
-            <Link href="/audiovisual" className={`w-full whitespace-nowrap rounded-full px-[1.15rem] py-[0.45rem] text-center text-[0.9rem] transition-colors max-[760px]:py-3 min-[761px]:w-auto ${isAudioVisualPage ? "bg-[#161817] font-semibold text-[#f1efe9] shadow-[0_2px_10px_rgba(22,24,23,0.15)]" : "font-medium text-[#686b67] hover:text-[#6b2737]"}`} onClick={closeMenu}>
-              AudioVisual
-            </Link>
           </div>
 
           <div className="flex w-fit items-center gap-[0.85rem] rounded-full border border-[#161817]/15 bg-[#f1efe9]/80 px-[1.1rem] py-[0.65rem] shadow-[0_10px_30px_-10px_rgba(22,24,23,0.25)] backdrop-blur-2xl max-[760px]:w-full max-[760px]:justify-center">

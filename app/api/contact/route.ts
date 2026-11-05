@@ -7,6 +7,7 @@ type ContactPayload = {
   email?: unknown;
   message?: unknown;
   website?: unknown;
+  privacyAccepted?: unknown;
 };
 
 let rateLimiter: Ratelimit | null = null;
@@ -191,6 +192,13 @@ export async function POST(request: Request) {
   const name = getText(payload.name);
   const email = getText(payload.email);
   const message = getText(payload.message);
+
+  if (payload.privacyAccepted !== true) {
+    return NextResponse.json(
+      { error: "Aceita a Política de Privacidade para enviar a mensagem." },
+      { status: 400 },
+    );
+  }
 
   if (!name || !email || !message) {
     return NextResponse.json(

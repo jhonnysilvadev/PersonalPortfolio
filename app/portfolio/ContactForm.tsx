@@ -28,6 +28,7 @@ export default function ContactForm() {
     const name = String(formData.get("name") ?? "").trim();
     const email = String(formData.get("email") ?? "").trim();
     const message = String(formData.get("message") ?? "").trim();
+    const privacyAccepted = formData.get("privacyAccepted") === "on";
     const nextFieldErrors: Record<string, string> = {};
 
     if (!name) {
@@ -42,6 +43,11 @@ export default function ContactForm() {
 
     if (!message) {
       nextFieldErrors.message = "Escreve algumas palavras sobre o projeto.";
+    }
+
+    if (!privacyAccepted) {
+      nextFieldErrors.privacyAccepted =
+        "Aceita a Política de Privacidade para enviar a mensagem.";
     }
 
     if (Object.keys(nextFieldErrors).length > 0) {
@@ -62,6 +68,7 @@ export default function ContactForm() {
           name,
           email,
           message,
+          privacyAccepted,
         }),
       });
 
@@ -132,6 +139,42 @@ export default function ContactForm() {
         />
         {fieldErrors.message && <span id="message-error" className="form-field-error">{fieldErrors.message}</span>}
       </label>
+      <label className="group flex cursor-pointer items-center gap-3 text-xs leading-5 text-[#686b67]">
+        <input
+          name="privacyAccepted"
+          type="checkbox"
+          required
+          aria-invalid={Boolean(fieldErrors.privacyAccepted)}
+          aria-describedby={
+            fieldErrors.privacyAccepted ? "privacy-accepted-error" : undefined
+          }
+          className="peer sr-only"
+          onChange={() => clearFieldError("privacyAccepted")}
+        />
+        <span
+          aria-hidden="true"
+          className={`privacy-switch pointer-events-none relative h-5 w-9 shrink-0 rounded-full border border-[#161817]/30 bg-[#e9e6de] transition-colors duration-200 after:absolute after:left-1 after:top-1/2 after:h-3 after:w-3 after:-translate-y-1/2 after:rounded-full after:bg-[#686b67] after:transition-all after:duration-200 group-hover:border-[#6b2737] peer-focus-visible:outline peer-focus-visible:outline-2 peer-focus-visible:outline-offset-2 peer-focus-visible:outline-[#6b2737] peer-checked:border-[#6b2737] peer-checked:bg-[#6b2737] peer-checked:after:translate-x-4 peer-checked:after:bg-[#f1efe9] ${
+            fieldErrors.privacyAccepted
+              ? "border-[#6b2737]"
+              : ""
+          }`}
+        />
+        <span>
+          Aceito a{" "}
+          <a
+            href="/privacidade"
+            className="font-semibold text-[#6b2737] underline underline-offset-2 transition-colors hover:text-[#161817]"
+          >
+            Política de Privacidade
+          </a>
+          .
+        </span>
+      </label>
+      {fieldErrors.privacyAccepted && (
+        <p id="privacy-accepted-error" className="form-field-error">
+          {fieldErrors.privacyAccepted}
+        </p>
+      )}
       <div className="contact-form-trap" aria-hidden="true">
         <label htmlFor="website">Website</label>
         <input
@@ -149,7 +192,9 @@ export default function ContactForm() {
           className="group inline-flex items-center gap-3 rounded-full bg-[#161817] px-5 py-3 text-sm font-semibold text-[#f1efe9] transition-all duration-300 hover:-translate-y-0.5 hover:bg-[#6b2737] hover:shadow-[0_6px_18px_rgba(107,39,55,0.16)] active:translate-y-0 active:shadow-none disabled:cursor-wait disabled:opacity-60"
         >
           {status === "sending" ? "A enviar..." : "Enviar mensagem"}
-          <ArrowUpRight />
+          <span className="transition-transform duration-200 group-hover:translate-x-1 group-hover:-translate-y-1 group-focus-within:translate-x-1 group-focus-within:-translate-y-1">
+            <ArrowUpRight />
+          </span>
         </button>
         {status === "success" && (
           <p role="status" className="border-l-2 border-[#86a889] pl-3 text-sm leading-5 text-[#4d5950]">

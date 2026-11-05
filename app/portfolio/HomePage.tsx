@@ -145,13 +145,12 @@ export default async function HomePage() {
 
             <div className="hero-intro">
               <p className="hero-role">
-                MULTIMÉDIA
+                Front-end
                 <br />
-                & FRONT-END
               </p>
               <p className="hero-description ">
-                Crio conteúdos visuais, interfaces e
-                soluções digitais focadas no essencial e sem rodeios.
+                Faço sites e interfaces para quem tem uma boa ideia
+                e não quer andar às voltas com coisas desnecessárias.
               </p>
             </div>
           </div>
@@ -285,10 +284,10 @@ export default async function HomePage() {
             </p>
             <div className="mt-12 grid gap-8 border-t border-[#161817]/20 pt-6 text-sm leading-6 text-[#686b67] sm:grid-cols-2">
               <p>
-                Gosto de coisas que funcionam sem ninguém ter de explicar: seja um vídeo com o ritmo certo que prende à primeira, ou código limpo que consigo rever daqui a seis meses sem praguejar.
+                Gosto de interfaces que se usam sem ninguém explicar nada, e de código que consigo ler daqui a seis meses sem praguejar.
               </p>
               <p>
-                Quando não estou a criar ou a editar, estou a ver referências, bastidores e como é que outros resolveram o mesmo problema técnico ou visual. Fico ali um bom bocado.
+                Quando não estou a programar, estou a ver como é que os outros resolveram o mesmo problema. Fico ali um bom bocado.
               </p>
             </div>
           </div>

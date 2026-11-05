@@ -1,0 +1,74 @@
+CONFIRMACAO DAS ALTERACOES - 2026
+
+FEITO
+
+[x] Removido AudioVisual da Navbar e da navegacao publica.
+[x] Mantidos app/audiovisual/page.tsx e app/portfolio/AudioVisualPage.tsx.
+[x] Rota /audiovisual protegida por ENABLE_AUDIOVISUAL=false no .env.local e no .env.example; com a opcao desligada, responde como pagina nao encontrada.
+[x] Repostos os textos anteriores ao audiovisual, confirmados no historico Git.
+[x] Removido o Vercel Analytics para nao recolher analytics nem exigir consentimento para esse rastreador.
+[x] Criada a Politica de Privacidade em /privacidade.
+[x] Criado o Aviso Legal e Direitos de Autor em /termos.
+[x] Adicionados links para as paginas legais no rodape.
+[x] Adicionada caixa de consentimento nao pre-marcada no formulario, com link para a Politica de Privacidade.
+[x] Substituída a checkbox por um switch editorial compacto nas cores do site, mantendo consentimento obrigatório e foco acessível.
+[x] Corrigido o alinhamento vertical da bolinha do switch para ficar centrada no trilho.
+[x] Adicionada uma pequena animação ao aceitar a Política de Privacidade, respeitando prefers-reduced-motion.
+[x] Corrigido o switch para o elemento visual não bloquear o clique no input acessível.
+[x] Testado no browser: navegação com um clique para Inicio, Projetos, Sobre e Contacto.
+[x] Testado no browser: active atualiza ao descer e ao voltar ao topo.
+[x] Testado no browser: switch da Política de Privacidade alterna corretamente.
+[x] Auditoria browser: menu móvel abre/fecha e os links fecham o menu depois da navegação.
+[x] Auditoria browser: não foi detetado overflow horizontal em viewport móvel de 390px.
+[x] Auditoria browser: /privacidade e /termos respondem corretamente.
+[x] Auditoria browser: /audiovisual não expõe o conteúdo quando ENABLE_AUDIOVISUAL=false.
+[x] Auditoria browser: endpoint rejeita pedidos sem consentimento com HTTP 400.
+[x] Auditoria browser: foco do botão do menu é acessível por teclado.
+[x] Adicionada uma pequena animação ao arrow do botão de envio no hover e foco.
+[x] O endpoint tambem rejeita pedidos sem consentimento valido.
+[x] O formulario continua a pedir apenas nome, email e mensagem.
+[x] Confirmado que nao existem imagens de projetos na pagina principal para as quais faltasse alt text.
+[x] Os links e botoes existentes mantem nomes acessiveis: Abrir menu, Fechar menu, Ver trabalho, Enviar mensagem e Abrir site de projeto.
+[x] Mantidos os avisos de copyright no rodape: © 2026 Jhonny Silva.
+
+VERIFICACAO DE PRIVACIDADE
+
+- Nao foi encontrado Google Analytics, outro script de analytics, YouTube ou Vimeo embutido.
+- O @vercel/analytics foi removido da aplicacao.
+- As fontes usam next/font e sao servidas pela aplicacao depois do build, sem um pedido de fonte no navegador a cada visita.
+- O formulario envia dados para o servico de email configurado em Resend. O prazo de conservacao e as condicoes desse fornecedor devem ser confirmados pelo titular.
+- O rate limiting opcional usa Upstash Redis quando configurado e pode tratar o IP do pedido. Esta finalidade e infraestrutura tecnica e deve ser confirmada na configuracao de producao.
+- Com o estado atual, nao foi identificado um cookie nao essencial que exija banner. Se forem adicionados analytics, publicidade, embeds ou cookies nao essenciais, a avaliacao tem de ser refeita.
+
+CONTEUDOS DE TERCEIROS
+
+- Fontes: Space Grotesk e JetBrains Mono via next/font/google. O build faz a incorporacao/serving das fontes; confirmar licencas e creditos se houver redistribuicao fora deste projeto.
+- Icones SVG: icones inline de LinkedIn, GitHub e seta, sem pacote externo identificado.
+- Imagens: logo.jpeg e logobranco.jpeg foram criados pelo titular com flow.google.com; nao foi identificado um credito externo necessario.
+- Projetos: dados e links sao carregados da API publica do GitHub e cada repositorio pode ter a sua propria licenca.
+- Nao foram identificadas imagens de projetos, YouTube ou Vimeo na pagina principal.
+
+PENDENTE / A CONFIRMAR PELO TITULAR
+
+[ ] Confirmar se os projetos apresentados permitem os textos, logos e links mostrados.
+[ ] Rever o texto legal com um profissional, se for necessaria uma politica juridica completa.
+[ ] Fazer teste visual/manual de contraste no Lighthouse; as cores foram preservadas e nao foi instalado um auditor automatico.
+[ ] Se forem adicionados novos rastreadores, cookies ou embeds, adicionar avaliacao de consentimento antes da publicacao.
+
+OBSERVACOES DA AUDITORIA
+
+- O build de produção passou sem erros.
+- O aviso "PROJECT_DOMAINS is not configured" é esperado quando não existem domínios personalizados configurados; não impede o carregamento dos projetos.
+- O HTTP 400 observado no teste do endpoint foi intencional: confirmou a rejeição de um pedido sem consentimento.
+
+CONFIRMACOES RECEBIDAS
+
+- Space Grotesk e JetBrains Mono usam SIL Open Font License (OFL); nao e necessario credito visivel.
+- O rate limiting trata IP apenas para seguranca/previsao de abusos, ao abrigo de interesse legitimo.
+- As mensagens recebidas serao guardadas no maximo 1 ano apos a ultima comunicacao e depois eliminadas.
+- O Resend e o servico externo de email usado para o envio das mensagens.
+- Os logos locais foram criados pelo titular com flow.google.com.
+
+NOTA
+
+Este ficheiro e uma checklist tecnica da implementacao e nao e aconselhamento juridico.

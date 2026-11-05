@@ -29,7 +29,13 @@ export default function Footer({ topHref = "#home" }: FooterProps) {
       </a>
       <div className="mt-10 flex flex-col gap-3 border-t border-[#161817]/10 pt-4 text-xs text-[#858981] sm:flex-row sm:items-center sm:justify-between">
         <span>© 2026 Jhonny Silva</span>
-        <div className="flex gap-5">
+        <div className="flex flex-wrap gap-5">
+          <a href="/privacidade" className="transition-colors hover:text-[#6b2737]">
+            Privacidade
+          </a>
+          <a href="/termos" className="transition-colors hover:text-[#6b2737]">
+            Direitos de autor
+          </a>
           <a
             href="https://github.com/jhonnysilvadev"
             target="_blank"

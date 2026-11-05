@@ -1,5 +1,4 @@
 import type { Metadata } from "next";
-import { Analytics } from "@vercel/analytics/next";
 import { JetBrains_Mono, Space_Grotesk } from "next/font/google";
 import type { ReactNode } from "react";
 import "./globals.css";
@@ -56,7 +55,6 @@ export default function RootLayout({ children }: { children: ReactNode }) {
     >
       <body className="min-h-full flex flex-col">
         {children}
-        <Analytics />
       </body>
     </html>
   );
