@@ -10,6 +10,8 @@
   --tone-primary-strong: #005247;
   --tone-muted: #5e696b;
   --tone-soft: #e2ecea;
+  --font-geist-sans: "Segoe UI", Arial, sans-serif;
+  --font-geist-mono: "Cascadia Code", Consolas, monospace;
 }
 
 @theme inline {
